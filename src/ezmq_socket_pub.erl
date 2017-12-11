@@ -65,10 +65,10 @@ idle(do, {deliver_send, abort}, MqSState, State) ->
     {next_state, idle, MqSState, State};
 idle(do, {deliver_send, _Transport}, MqSState, State) ->
     {next_state, idle, MqSState, State};
-idle(do, {control, {PeerId, [{normal, <<0:8>>}]}}, MqSState, State) ->
+idle(do, {control, {_PeerId, [{normal, <<0:8>>}]}}, MqSState, State) ->
     %% TODO: unsubscribe all topic for this peer
     {next_state, idle, MqSState, State};
-idle(do, {control, {PeerId, [{normal, <<1:8, Topic/binary>>}]}}, MqSState, State) ->
+idle(do, {control, {_PeerId, [{normal, <<1:8, _Topic/binary>>}]}}, MqSState, State) ->
     %% TODO: subscribe the topic for this peer
     {next_state, idle, MqSState, State};
 idle(do, _, _MqSState, _State) ->
